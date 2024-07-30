@@ -114,12 +114,7 @@
 
     <div class="flex items-center justify-center gap-4 mt-4">
       <button mat-flat-button (click)="applyFilter()">Apply</button>
-      <button
-        mat-raised-button
-        (click)="resetFilter()"
-        [disabled]="!filterFormGroup.dirty">
-        Reset
-      </button>
+      <button mat-raised-button (click)="resetFilter()">Reset</button>
     </div>
   </form>
 </div>
