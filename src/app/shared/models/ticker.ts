@@ -21,3 +21,13 @@ export interface ITicker {
   lastId: number;
   count: number;
 }
+
+export interface ITickerRow {
+  symbol: string;
+  price: string;
+  change: string;
+  changePercent: string;
+  high: string;
+  low: string;
+  volume: string;
+}

@@ -12,3 +12,55 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+.material-icons {
+  font-size: 24px;
+  font-family: 'Material Icons';
+  .mat-badge-content {
+    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
+      sans-serif;
+  }
+}
+
+.mat-mdc-form-field {
+  .mdc-text-field--filled {
+    padding: 0 5px;
+
+    .mat-mdc-form-field-flex {
+      .mat-mdc-form-field-infix {
+        padding: 16px 0 5px;
+        min-height: 42px;
+        height: 42px;
+
+        .mat-mdc-floating-label {
+          top: 24px;
+          font-size: 14px;
+        }
+
+        .mat-mdc-input-element {
+          // padding: 0 5px;
+          font-size: 14px;
+          line-height: 16px;
+        }
+
+        .mat-mdc-select-value-text {
+          font-size: 14px;
+          line-height: 16px;
+        }
+      }
+    }
+
+    .mdc-line-ripple::before {
+      border-bottom-color: #d1d5dc;
+    }
+  }
+}
+
+.mat-mdc-option {
+  min-height: fit-content !important;
+  padding: 10px !important;
+  .mdc-list-item__primary-text {
+    font-size: 14px !important;
+    line-height: normal !important;
+  }
+}

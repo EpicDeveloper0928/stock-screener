@@ -1,22 +1,14 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { StockScreenerApiService } from './services/stock-screener-api.service';
-import { HttpClientModule } from '@angular/common/http';
-import { MatButtonModule } from '@angular/material/button';
 
-export interface ITickerRow {
-  symbol: string;
-  price: string;
-  change: string;
-  changePercent: string;
-  high: string;
-  low: string;
-  volume: string;
-}
+import { ITickerRow } from '../../shared/models/ticker';
+import { ScreenerFilterDialogComponent } from './components/screener-filter-dialog/screener-filter-dialog.component';
+import { StockScreenerApiService } from './services/stock-screener-api.service';
+import { StockScreenerService } from './services/stock-screener.service';
 
 @Component({
   selector: 'app-stock-screener',
@@ -43,7 +35,11 @@ export class StockScreenerComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
   @ViewChild(MatSort) sort: MatSort | null = null;
 
-  constructor(private stockScreenerApiService: StockScreenerApiService) {}
+  constructor(
+    private stockScreenerApiService: StockScreenerApiService,
+    private stockScreenerService: StockScreenerService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.stockScreenerApiService.getTickerPriceChange().subscribe(res => {
@@ -60,18 +56,28 @@ export class StockScreenerComponent implements OnInit {
             volume: ticker.volume,
           };
         });
-      this.dataSource = new MatTableDataSource<ITickerRow>(this.tableData);
+      this.dataSource.data = this.tableData;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.subscribeFilters();
     });
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  private subscribeFilters() {
+    this.stockScreenerService.stockFilters.subscribe(filters => {
+      this.dataSource.data = this.stockScreenerService.filterData(
+        this.tableData,
+        Object.entries(filters).filter(
+          ([_, value]) => !!value.type && !!value.min
+        )
+      );
+    });
+  }
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  openFilterDialog() {
+    this.dialog.open(ScreenerFilterDialogComponent, {
+      maxWidth: '1440px',
+      minWidth: '768px',
+    });
   }
 }
