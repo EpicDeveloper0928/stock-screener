@@ -4,16 +4,24 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { ITickerRow } from '../../shared/models/ticker';
 import { ScreenerFilterDialogComponent } from './components/screener-filter-dialog/screener-filter-dialog.component';
 import { StockScreenerApiService } from './services/stock-screener-api.service';
 import { StockScreenerService } from './services/stock-screener.service';
+import { IFilterItem } from '../../shared/models/filter';
 
 @Component({
   selector: 'app-stock-screener',
   standalone: true,
-  imports: [MatTableModule, MatSortModule, MatPaginatorModule, MatButtonModule],
+  imports: [
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatButtonModule,
+    MatBadgeModule,
+  ],
   providers: [StockScreenerApiService],
   templateUrl: './stock-screener.component.html',
   styleUrl: './stock-screener.component.scss',
@@ -34,6 +42,8 @@ export class StockScreenerComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
   @ViewChild(MatSort) sort: MatSort | null = null;
+
+  activeFilters: [string, IFilterItem][] = [];
 
   constructor(
     private stockScreenerApiService: StockScreenerApiService,
@@ -65,11 +75,12 @@ export class StockScreenerComponent implements OnInit {
 
   private subscribeFilters() {
     this.stockScreenerService.stockFilters.subscribe(filters => {
+      this.activeFilters = Object.entries(filters).filter(
+        ([_, value]) => !!value.type && !!value.min
+      );
       this.dataSource.data = this.stockScreenerService.filterData(
         this.tableData,
-        Object.entries(filters).filter(
-          ([_, value]) => !!value.type && !!value.min
-        )
+        this.activeFilters
       );
     });
   }

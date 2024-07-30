@@ -1,5 +1,9 @@
 <div class="flex items-center p-2">
-  <button mat-button (click)="openFilterDialog()">
+  <button
+    mat-stroked-button
+    (click)="openFilterDialog()"
+    [matBadge]="activeFilters.length"
+    [matBadgeHidden]="!activeFilters.length">
     <i class="mdi mdi-tune-vertical"></i> Filter
   </button>
 </div>
