@@ -56,7 +56,7 @@ export class StockScreenerComponent implements OnInit {
       this.tableData = res.map(ticker => {
         return {
           symbol: ticker.symbol,
-          price: ticker.openPrice,
+          price: ticker.bidPrice,
           change: ticker.priceChange,
           changePercent: ticker.priceChangePercent,
           high: ticker.highPrice,
@@ -86,12 +86,10 @@ export class StockScreenerComponent implements OnInit {
 
   private updatePrices() {
     this.stockScreenerApiService.getRealTimePrice().subscribe(res => {
-      this.dataSource.data = this.tableData.map(row => {
-        return {
-          ...row,
-          price: res.find(item => item.symbol === row.symbol)?.price ?? '-',
-        };
-      });
+      this.dataSource.data = this.tableData.map(row => ({
+        ...row,
+        price: res.find(item => item.symbol === row.symbol)?.price ?? '-',
+      }));
     });
   }
 
