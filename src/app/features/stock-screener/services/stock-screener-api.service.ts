@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { environment } from '../../../../environments/environment.development';
 import { ITicker } from '../../../shared/models/ticker';
-import { interval, map, switchMap } from 'rxjs';
+import { Observable, interval, map, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +27,15 @@ export class StockScreenerApiService {
       ),
       map(data => data.filter(item => item.symbol.endsWith('USDT')))
     );
+  }
+
+  public get24hPriceHistory(symbol: string) {
+    return this.http.get<any[][]>(this.baseURL + '/klines', {
+      params: {
+        symbol,
+        interval: '1h',
+        limit: '24',
+      },
+    });
   }
 }

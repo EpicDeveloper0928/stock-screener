@@ -56,6 +56,15 @@ body {
   }
 }
 
+.mat-mdc-menu-panel {
+  max-width: none !important;
+  max-height: none !important;
+
+  .mat-mdc-menu-content {
+    padding: 0 !important;
+  }
+}
+
 .mat-mdc-option {
   min-height: fit-content !important;
   padding: 10px !important;
@@ -63,4 +72,13 @@ body {
     font-size: 14px !important;
     line-height: normal !important;
   }
+}
+
+ng-scrollbar.cool-scrollbar {
+  --scrollbar-padding: 0px;
+  --scrollbar-size: 6px;
+  --scrollbar-thumb-color: gray;
+  --scrollbar-hover-size: 10px;
+  --scrollbar-track-color: rgba(0, 0, 0, 0.05);
+  --scrollbar-border-radius: 10px;
 }
