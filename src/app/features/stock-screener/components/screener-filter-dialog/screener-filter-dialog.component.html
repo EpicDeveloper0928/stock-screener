@@ -10,10 +10,10 @@
     <i class="mdi mdi-tune-vertical"></i> Filters
   </h3>
 
-  <form [formGroup]="filterFormGroup">
-    <div class="flex gap-4 p-8 border border-slate-300 rounded-xl">
+  <form [formGroup]="filterFormGroup" class="flex flex-col">
+    <div class="flex gap-4 text-base border border-slate-300 rounded-xl">
       <ul
-        class="flex flex-col gap-4 *:grid *:grid-cols-4 *:gap-4 *:first:col-span-1">
+        class="max-h-[80vh] overflow-y-auto w-full flex flex-col divide-y divide-slate-300 *:p-5 *:grid *:grid-cols-4 *:gap-4 *:items-center *:max-md:flex *:max-md:flex-col *:max-md:items-stretch">
         <li formGroupName="volume">
           <span>Trade Volume</span>
 

@@ -87,9 +87,13 @@
       </tr>
     </table>
 
-    <mat-menu #priceChartMenu="matMenu" xPosition="before">
-      <div (click)="$event.stopPropagation()" class="p-4">
-        <div id="price-chart" style="width: 1000px; height: 400px"></div>
+    <mat-menu
+      #priceChartMenu="matMenu"
+      xPosition="before"
+      class="p-4 m-5 max-md:w-screen"
+      classList="">
+      <div (click)="$event.stopPropagation()" class="w-full overflow-auto">
+        <div id="price-chart" style="width: 768px; height: 400px"></div>
       </div>
     </mat-menu>
   </ng-scrollbar>

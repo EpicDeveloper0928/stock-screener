@@ -24,6 +24,7 @@ body {
 
 .mat-mdc-form-field {
   .mdc-text-field--filled {
+    background-color: rgba(0, 0, 0, 0.05) !important;
     padding: 0 5px;
 
     .mat-mdc-form-field-flex {
@@ -54,6 +55,10 @@ body {
       border-bottom-color: #d1d5dc;
     }
   }
+}
+
+.mat-mdc-paginator-container {
+  padding: 8px !important;
 }
 
 .mat-mdc-menu-panel {

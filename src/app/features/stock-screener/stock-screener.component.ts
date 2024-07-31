@@ -173,8 +173,9 @@ export class StockScreenerComponent implements OnInit {
 
   openFilterDialog() {
     this.dialog.open(ScreenerFilterDialogComponent, {
-      maxWidth: '1440px',
-      minWidth: '768px',
+      maxWidth: '768px',
+      width: '100%',
+      panelClass: ['m-5', 'rounded-md'],
     });
   }
 
