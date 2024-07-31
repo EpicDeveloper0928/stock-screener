@@ -163,10 +163,11 @@ export class StockScreenerComponent implements OnInit {
       .getRealTimePrice()
       .pipe(takeUntil(this.destroy$))
       .subscribe(res => {
-        this.dataSource.data = this.tableData.map(row => ({
+        this.tableData = this.tableData.map(row => ({
           ...row,
           price: res.find(item => item.symbol === row.symbol)?.price ?? '-',
         }));
+        this.subscribeFilters();
       });
   }
 
