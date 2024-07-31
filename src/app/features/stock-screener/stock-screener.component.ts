@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,7 +8,6 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { HighchartsChartModule } from 'highcharts-angular';
 import * as Highcharts from 'highcharts/highstock';
-import { NgScrollbarModule } from 'ngx-scrollbar';
 import { Subject, Subscription, takeUntil } from 'rxjs';
 
 import { IFilterItem } from '../../shared/models/filter';
@@ -28,11 +27,11 @@ import { StockScreenerService } from './services/stock-screener.service';
     MatBadgeModule,
     MatMenuModule,
     HighchartsChartModule,
-    NgScrollbarModule,
   ],
   providers: [StockScreenerApiService],
   templateUrl: './stock-screener.component.html',
   styleUrl: './stock-screener.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class StockScreenerComponent implements OnInit {
   displayedColumns: string[] = [

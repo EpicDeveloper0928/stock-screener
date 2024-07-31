@@ -1,0 +1,10 @@
+app-stock-screener {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  .table-container {
+    max-height: calc(100vh - 9rem);
+  }
+}

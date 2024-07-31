@@ -24,7 +24,6 @@
     "@angular/router": "^18.1.0",
     "@mdi/font": "^7.4.47",
     "highcharts-angular": "^4.0.1",
-    "ngx-scrollbar": "^15.1.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
