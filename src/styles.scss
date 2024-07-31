@@ -1,1 +1,80 @@
 /* You can add global styles to this file, and also import other style files */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.material-icons {
+  font-size: 24px;
+  font-family: 'Material Icons';
+  .mat-badge-content {
+    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
+      sans-serif;
+  }
+}
+
+.mat-mdc-form-field {
+  .mdc-text-field--filled {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    padding: 0 5px;
+
+    .mat-mdc-form-field-flex {
+      .mat-mdc-form-field-infix {
+        padding: 16px 0 5px;
+        min-height: 42px;
+        height: 42px;
+
+        .mat-mdc-floating-label {
+          top: 24px;
+          font-size: 14px;
+        }
+
+        .mat-mdc-input-element {
+          // padding: 0 5px;
+          font-size: 14px;
+          line-height: 16px;
+        }
+
+        .mat-mdc-select-value-text {
+          font-size: 14px;
+          line-height: 16px;
+        }
+      }
+    }
+
+    .mdc-line-ripple::before {
+      border-bottom-color: #d1d5dc;
+    }
+  }
+}
+
+.mat-mdc-paginator-container {
+  padding: 8px !important;
+}
+
+.mat-mdc-menu-panel {
+  max-width: none !important;
+  max-height: none !important;
+
+  .mat-mdc-menu-content {
+    padding: 0 !important;
+  }
+}
+
+.mat-mdc-option {
+  min-height: fit-content !important;
+  padding: 10px !important;
+  .mdc-list-item__primary-text {
+    font-size: 14px !important;
+    line-height: normal !important;
+  }
+}
