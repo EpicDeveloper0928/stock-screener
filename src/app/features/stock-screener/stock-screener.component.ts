@@ -53,23 +53,22 @@ export class StockScreenerComponent implements OnInit {
 
   ngOnInit(): void {
     this.stockScreenerApiService.getTickerPriceChange().subscribe(res => {
-      this.tableData = res
-        .filter(ticker => ticker.symbol.includes('USDT'))
-        .map(ticker => {
-          return {
-            symbol: ticker.symbol,
-            price: ticker.highPrice,
-            change: ticker.priceChange,
-            changePercent: ticker.priceChangePercent,
-            high: ticker.highPrice,
-            low: ticker.lowPrice,
-            volume: ticker.volume,
-          };
-        });
+      this.tableData = res.map(ticker => {
+        return {
+          symbol: ticker.symbol,
+          price: ticker.openPrice,
+          change: ticker.priceChange,
+          changePercent: ticker.priceChangePercent,
+          high: ticker.highPrice,
+          low: ticker.lowPrice,
+          volume: ticker.volume,
+        };
+      });
       this.dataSource.data = this.tableData;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.subscribeFilters();
+      this.updatePrices();
     });
   }
 
@@ -82,6 +81,17 @@ export class StockScreenerComponent implements OnInit {
         this.tableData,
         this.activeFilters
       );
+    });
+  }
+
+  private updatePrices() {
+    this.stockScreenerApiService.getRealTimePrice().subscribe(res => {
+      this.dataSource.data = this.tableData.map(row => {
+        return {
+          ...row,
+          price: res.find(item => item.symbol === row.symbol)?.price ?? '-',
+        };
+      });
     });
   }
 
